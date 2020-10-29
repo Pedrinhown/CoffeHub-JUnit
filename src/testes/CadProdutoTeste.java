@@ -2,6 +2,8 @@ package testes;
 
 import static org.junit.Assert.fail;
 
+import java.sql.SQLException;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -86,7 +88,7 @@ public class CadProdutoTeste {
 		try {
 			Produto prod = this.GravarProdutoValidoComCategoria();
 			
-			if(ret == 2)
+			/* if(ret == 2) */
 				
 				
 			
@@ -115,12 +117,6 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaQtdProdutoValidoEditar() {
-		
-	}
-	
-	@Ignore
-	@Test
 	public void TestaQtdProdutoInvalidoEditar() {
 		Produto produto = new Produto();
 		produto.setCod(1);
@@ -140,12 +136,6 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaValorProdutoValidoEditar() {
-		
-	}
-	
-	@Ignore
-	@Test
 	public void TestaValorProdutoInvalidoEditar() {
 		Produto produto = new Produto();
 		produto.setCod(1);
@@ -162,13 +152,7 @@ public class CadProdutoTeste {
 			Assert.assertEquals("O valor unitário não pode ser menor ou igual a zero.", e.getMessage());
 		}
 	}
-	
-	@Ignore
-	@Test
-	public void TestaUnProdutoValidoEditar() {
-		
-	}
-	
+
 	@Ignore
 	@Test
 	public void TestaUnProdutoInvalidoEditar() {
@@ -191,11 +175,6 @@ public class CadProdutoTeste {
 
 
 	// Testar todos os campos - Gravar
-	@Ignore
-	@Test
-	public void TestaDescricaoProdutoValidoGravar() {
-		
-	}
 	
 	@Ignore
 	@Test
@@ -212,12 +191,6 @@ public class CadProdutoTeste {
 			Assert.assertEquals("Informe uma descrição para o produto.", e.getMessage());
 		}
 	}	
-	
-	@Ignore
-	@Test
-	public void TestaQtdProdutoValidoGravar() {
-		
-	}
 	
 	@Ignore
 	@Test
@@ -238,12 +211,6 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaValorProdutoValidoGravar() {
-		
-	}
-	
-	@Ignore
-	@Test
 	public void TestaValorProdutoInvalidoGravar() {
 		Produto produto = new Produto();
 		produto.setDescricao("Teste JUnit");
@@ -260,12 +227,6 @@ public class CadProdutoTeste {
 		}
 	}
 	
-	
-	@Ignore
-	@Test
-	public void TestaUnProdutoValidoGravar() {
-		
-	}
 	
 	@Ignore
 	@Test
@@ -298,15 +259,17 @@ public class CadProdutoTeste {
 	@Ignore
 	@Test
 	public void TestaGravarProdutoInvalido() {
-		
+		Produto produto = null;
+		try 
+		{
+			Assert.assertEquals(1, new ControlProduto().Inserir(produto));
+			fail();
+		}
+		catch (Exception e)
+		{
+			Assert.assertEquals("Informe um produto para a gravação.", e.getMessage());
+		}
 	}
-	
-	@Ignore
-	@Test
-	public void TestaGravarProdutoValido() {
-		
-	}
-	
 	
 	//testar o editar produto
 	
@@ -328,8 +291,17 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaEditarProdutoValido() {
-		
+	public void TestaEditarProdutoValido() throws ClassNotFoundException, SQLException, Exception {
+		Produto produto = new Produto();
+		produto.setCod(4);
+		produto.setDescricao("Teste JUnit");
+		produto.setQtd_atual(1);
+		produto.setValor_un(100);
+		produto.setUnidadeMedida("CX");		
+		Categoria cat = new ControlCategoria().Carregar(1);
+		produto.setCategoria(cat);
+
+		Assert.assertEquals(1, new ControlProduto().Editar(produto));
 	}
 	
 	//testar excluir produto
