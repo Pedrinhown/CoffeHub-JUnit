@@ -6,12 +6,63 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import control.produto.ControlCategoria;
 import control.produto.ControlProduto;
+import entitys.Categoria;
 import entitys.Produto;
 
 public class CadProdutoTeste {
 	
 	// Testar todos os campos - Editar
+	
+	private Produto ProdutoValidoGravar() {
+		Produto produto = new Produto();
+		produto.setDescricao("Produto JUnit");
+		produto.setQtd_atual(3);
+		produto.setUnidadeMedida("CX");
+		produto.setValor_un(1.55);
+		return produto;
+	}
+	
+	private Categoria CategoriaValidaGravar() {
+		Categoria categoria = new Categoria();
+		categoria.setNome("Categoria JUnit");
+		return categoria;
+	}
+	
+	private Produto GravarProdutoValidoComCategoria() {
+		Produto retorno = null;
+		
+		try {
+			
+			ControlCategoria ctCategoria = new ControlCategoria();
+			ControlProduto ctProduto = new ControlProduto();
+			Categoria cat = this.CategoriaValidaGravar();
+			retorno = this.ProdutoValidoGravar();
+			String nomeCat = cat.getNome();
+			String nomeProd = retorno.getDescricao();
+			
+			ctCategoria.Inserir(cat);
+			 
+			 cat = ctCategoria.Listar(cat.getNome()).stream().filter(x -> x.getNome().equals(nomeCat))
+					  .findAny()
+					  .orElse(null);
+			 
+			 retorno.setCategoria(cat);
+			 
+			 ctProduto.Inserir(retorno);
+			 
+			 retorno = ctProduto.Listar(retorno.getDescricao()).stream().filter(x -> x.getDescricao().equals(nomeProd)).findAny().orElse(null);
+			
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println(ex.getMessage());
+			retorno = null;
+		}
+		
+		return retorno;
+	}
 	
 	@Ignore
 	@Test
@@ -31,8 +82,17 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaDescricaoProdutoValidoEditar() {	
-
+	public void TestaDescricaoProdutoValidoEditar() {
+		try {
+			Produto prod = this.GravarProdutoValidoComCategoria();
+			
+			if(ret == 2)
+				
+				
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	@Ignore
