@@ -32,11 +32,11 @@ public class ControlProduto {
 	
 	
 	
-	public int Deletar(int id) throws ClassNotFoundException, SQLException {
+	public int Deletar(int id) throws ClassNotFoundException, SQLException, Exception {
 		int retorno = 0;
 		try {
 			
-			if(id <= 0) throw new Error("Informe uma ID válida para a exclusão do produto.");
+			if(id <= 0) throw new Exception("Informe uma ID válida para a exclusão do produto.");
 			
 			Connection conn = ConexaoMySql.getInstance().getConnection();
 			
