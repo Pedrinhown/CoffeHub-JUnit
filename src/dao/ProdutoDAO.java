@@ -35,16 +35,17 @@ public class ProdutoDAO implements IProdutoDAO {
 			String sql = "INSERT INTO produto(cod_produto,nome_produto,valor_un,qtd_atual,categoria_cod,un_medida) VALUES (?,?,?,?,?,?)";
 
 			PreparedStatement statement = conexao.prepareStatement(sql);
-			
-			statement.setInt(1, this.ProximoNumeroProduto());
+			retorno = this.ProximoNumeroProduto();
+			statement.setInt(1, retorno);			
 			statement.setString(2, prod.getDescricao());
 			statement.setDouble(3, prod.getValor_un());
 			statement.setInt(4, prod.getQtd_atual());
 			statement.setInt(5, prod.getCategoria().getCod());
 			statement.setString(6, prod.getUnidadeMedida());
 			
-			retorno = statement.executeUpdate();
-			
+			if (statement.executeUpdate() <= 0) {
+				retorno = -1;
+			}
 			
 		} catch (ClassNotFoundException classEx) {
 			/* classEx.printStackTrace(); */
@@ -301,6 +302,33 @@ public class ProdutoDAO implements IProdutoDAO {
 		}
 
 		return numProduto + 1;
+	}
+	
+	
+	public int BuscarUltimo() throws Exception {
+		int numProduto = 0;
+
+		try {	
+
+			PreparedStatement statement = conexao.prepareStatement("select ifnull(max(cod_produto),0) as 'maior' from produto");
+
+			ResultSet resultSet = statement.executeQuery();
+
+			while(resultSet.next()) {
+			numProduto = resultSet.getInt("maior");
+			}
+			
+			if (numProduto < 0) throw new Exception ("Não foi possível recuperar o ultimo número dos produtos");
+			
+			statement.close();
+			
+		} catch (Exception ex) {
+			/* ex.printStackTrace(); */
+			throw ex;
+		}
+
+		return numProduto + 1;
+
 	}
 
 
