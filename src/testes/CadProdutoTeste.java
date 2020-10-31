@@ -3,6 +3,8 @@ package testes;
 import static org.junit.Assert.fail;
 
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -56,6 +58,23 @@ public class CadProdutoTeste {
 		}
 		
 		return retorno;
+	}
+	
+	@Test
+	public void TesteGravarMultiplos() {
+		Instant inicio = Instant.now();
+		
+		for (int i = 0; i < 1500; i++) {
+			this.GravarProdutoValidoComCategoria();
+		}
+		
+		Instant fim = Instant.now();
+		 
+		Duration duracao = Duration.between(inicio, fim);
+		long duracaoSegundos = duracao.toMillis() * 1000;
+		
+		Assert.assertTrue(duracaoSegundos > 20 ? false:true);
+
 	}
 	
 	@Ignore
