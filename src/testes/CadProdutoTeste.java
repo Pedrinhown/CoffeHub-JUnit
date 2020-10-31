@@ -15,7 +15,7 @@ import entitys.Produto;
 
 public class CadProdutoTeste {
 	
-	// Testar todos os campos - Editar
+	// Testar Gravar geral Válido
 	
 	private Produto ProdutoValidoGravar() {
 		Produto produto = new Produto();
@@ -41,15 +41,8 @@ public class CadProdutoTeste {
 			ControlProduto ctProduto = new ControlProduto();
 			Categoria cat = this.CategoriaValidaGravar();
 			retorno = this.ProdutoValidoGravar();
-			String nomeCat = cat.getNome();
-			/* String nomeProd = retorno.getDescricao(); */
 			
-			ctCategoria.Inserir(cat);
-			 
-			 cat = ctCategoria.Listar(cat.getNome()).stream().filter(x -> x.getNome().equals(nomeCat))
-					  .findAny()
-					  .orElse(null);
-			 
+			 cat = ctCategoria.Carregar(ctCategoria.Inserir(cat));
 			 retorno.setCategoria(cat);
 
 			 retorno = ctProduto.Carregar(ctProduto.Inserir(retorno));
@@ -65,12 +58,14 @@ public class CadProdutoTeste {
 		return retorno;
 	}
 	
-	
+	@Ignore
 	@Test
 	public void TestarGravarProdutoComCat() throws Exception
 	{
 		Assert.assertEquals(new ControlProduto().BuscarUltimo(), this.GravarProdutoValidoComCategoria().getCod());
 	}
+	
+	// Testar todos os campos - Editar
 	
 	@Ignore
 	@Test
@@ -85,21 +80,6 @@ public class CadProdutoTeste {
 		catch (Exception e)
 		{
 			Assert.assertEquals("Informe uma ID válida para o produto", e.getMessage());
-		}
-	}
-	
-	@Ignore
-	@Test
-	public void TestaDescricaoProdutoValidoEditar() {
-		try {
-			Produto prod = this.GravarProdutoValidoComCategoria();
-			
-			/* if(ret == 2) */
-				
-				
-			
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 	
@@ -291,16 +271,26 @@ public class CadProdutoTeste {
 	@Ignore
 	@Test
 	public void TestaEditarProdutoValido() throws ClassNotFoundException, SQLException, Exception {
-		Produto produto = new Produto();
-		produto.setCod(4);
-		produto.setDescricao("Teste JUnit");
-		produto.setQtd_atual(1);
-		produto.setValor_un(100);
-		produto.setUnidadeMedida("CX");		
-		Categoria cat = new ControlCategoria().Carregar(1);
-		produto.setCategoria(cat);
-
-		Assert.assertEquals(1, new ControlProduto().Editar(produto));
+		
+		try 
+		{			
+			Produto produto = new Produto();
+			produto.setCod(4);
+			produto.setDescricao("Teste JUnit");
+			produto.setQtd_atual(1);
+			produto.setValor_un(100);
+			produto.setUnidadeMedida("CX");		
+			Categoria cat = new ControlCategoria().Carregar(1);
+			produto.setCategoria(cat);
+			
+			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+		}
+		catch (Exception e)
+		{
+			fail();
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	//testar excluir produto
@@ -323,7 +313,16 @@ public class CadProdutoTeste {
 	
 	@Ignore
 	@Test
-	public void TestaExcluirProdutoValido() {
-		
+	public void TestaExcluirProdutoValido()
+	{
+		Produto porduto = this.GravarProdutoValidoComCategoria();		
+		try
+		{
+			Assert.assertEquals(1, new ControlProduto().Deletar(porduto.getCod()));
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		} 		
 	}	
 }
