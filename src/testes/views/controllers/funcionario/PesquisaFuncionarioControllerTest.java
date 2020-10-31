@@ -4,7 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class PesquisaFuncionarioControllerTest {
+import entitys.Funcionario;
+import entitys.Pessoa;
+import javafx.stage.Stage;
+import junit.framework.TestCase;
+import views.controllers.HomeController;
+
+class PesquisaFuncionarioControllerTest extends TestCase {
+	
 	
 	String entidadeController = ">Funcionario.PesquisaFuncionarioController";
 	String teste;
@@ -21,8 +28,9 @@ class PesquisaFuncionarioControllerTest {
 		error = "ERROR: erro ao tentar executar a tela PesquisaFuncionario";
 		try {
 			
-			//CÓDIOGO DO TESTE VEM AQUI.
-			 
+						
+			//assertEquals(HomeController.FuncionarioEstatico , HomeController.FuncionarioEstatico);
+			
 			System.out.println(entidadeController + "." + teste + ":\n" + "OK");
 		} catch (Exception e) {
 			System.out.println(entidadeController + "." + teste + ":\n" + error);
