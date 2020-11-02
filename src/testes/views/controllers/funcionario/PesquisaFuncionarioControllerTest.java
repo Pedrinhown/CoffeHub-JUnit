@@ -1,39 +1,47 @@
 package testes.views.controllers.funcionario;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
-import org.junit.jupiter.api.Test;
-
+import dao.FuncionarioDAO;
 import entitys.Funcionario;
-import entitys.Pessoa;
-import javafx.stage.Stage;
 import junit.framework.TestCase;
 import views.controllers.HomeController;
+import views.controllers.funcionario.CadFuncionarioController;
+import views.controllers.funcionario.PesquisaFuncionarioController;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PesquisaFuncionarioControllerTest extends TestCase {
 	
+	//Declare:
+	HomeController homeController; 
+	PesquisaFuncionarioController pesquisaFuncionarioController;
+	CadFuncionarioController cadFuncionarioController;
+	Funcionario func;
+	FuncionarioDAO funcDAO;	
 	
-	String entidadeController = ">Funcionario.PesquisaFuncionarioController";
-	String teste;
-	String error;
+	String error = "mensagem que só aparece se o método não tem declaração para variável -String error, isso é possível por causa do -TestInstance.Lifecycle.PER_CLASS";
 
-	@Test
-	void PesquisaFuncionarioTest() {
+	@BeforeEach
+	@DisplayName("Init Pesquisa Funcionario")
+	void init() {
+		homeController = new HomeController();
+		pesquisaFuncionarioController = new PesquisaFuncionarioController();
+		cadFuncionarioController = new CadFuncionarioController();
+		func = new Funcionario();
+		funcDAO = new FuncionarioDAO();		
 	}
 	
 	
 	@Test
+	@DisplayName("Teste Inicializacao da Tela Pesquisa Funcionario")
 	void testGetPesquisaFuncionario() {
-		teste = "getPesquisaFuncionario.status";
 		error = "ERROR: erro ao tentar executar a tela PesquisaFuncionario";
 		try {
 			
-						
-			//assertEquals(HomeController.FuncionarioEstatico , HomeController.FuncionarioEstatico);
+			//assertEquals(expected, actual);			
 			
-			System.out.println(entidadeController + "." + teste + ":\n" + "OK");
 		} catch (Exception e) {
-			System.out.println(entidadeController + "." + teste + ":\n" + error);
 			fail(error);
 		}
 	}

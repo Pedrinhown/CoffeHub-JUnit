@@ -1,66 +1,61 @@
 package testes.views.controllers.funcionario;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
-import org.junit.jupiter.api.Test;
+import dao.FuncionarioDAO;
+import entitys.Funcionario;
+import views.controllers.HomeController;
+import views.controllers.funcionario.CadFuncionarioController;
+import views.controllers.funcionario.PesquisaFuncionarioController;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CadFuncionarioControllerTest {
-
-	String entidadeController = ">Funcionario.CadFuncionarioController";
-	String teste;
-	String error;
 	
-	@Test
-	void CadFuncionarioTest() {
-		
+	HomeController homeController; 
+	PesquisaFuncionarioController pesquisaFuncionarioController;
+	CadFuncionarioController cadFuncionarioController;
+	Funcionario func;
+	FuncionarioDAO funcDAO;	
+	
+	String error = "mensagem que só aparece se o método não tem declaração para variável -String error, isso é possível por causa do -TestInstance.Lifecycle.PER_CLASS";
+
+	@BeforeEach
+	@DisplayName("Init Cadastro Funcionario")
+	void init() {
+		homeController = new HomeController();
+		pesquisaFuncionarioController = new PesquisaFuncionarioController();
+		cadFuncionarioController = new CadFuncionarioController();
+		func = new Funcionario();
+		funcDAO = new FuncionarioDAO();		
 	}
 	
 	@Test
+	@DisplayName("Falha Proposital")
+	void FailTest() {
+		error = "valor atual é diferente do esperado -> a != b";
+		try {
+			int a = 1;
+			int b = 2;
+			assertEquals(a, b, error);
+
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
+	
+	
+	@Test
+	@DisplayName("Teste Inicializacao da Tela Cadastro Funcionario")
 	void testGetCadFuncionario() {
-		teste = "GetCadFuncionario.status";
 		error = "ERROR: erro ao tentar executar a tela CadFuncionario";
 		try {
 			
-			//CÓDIOGO DO TESTE VEM AQUI.
+			//assertEquals(expected, actual);			
 			 
-			System.out.println(entidadeController + "." + teste + ":\n" + "OK");
 		} catch (Exception e) {
-			System.out.println(entidadeController + "." + teste + ":\n" + error);
 			fail(error);
 		}
 	}
 		
-	@Test
-	void testInitializeURLResourceBundle() {
-		teste = "initializeURLResourceBundle.status";
-		error = "ERROR: erro ao tentar distinguir entre tela inicializar tela cadastro ou tela edicao, verificar retorno de id";
-		try {
-			
-			//CÓDIOGO DO TESTE VEM AQUI.
-			 
-			System.out.println(entidadeController + "." + teste + ":\n" + "OK");
-		} catch (Exception e) {
-			System.out.println(entidadeController + "." + teste + ":\n" + error);
-			fail(error);
-		}
-	}
-
-	@Test
-	void testInitialize() {
-		teste = "initialize.status";
-		error = "ERROR: erro ao tentar inicializar testes primarios de objetos incorporados do JavaFX.SceneBuilder";
-		try {
-			
-			//CÓDIOGO DO TESTE VEM AQUI.
-			 
-			System.out.println(entidadeController + "." + teste + ":\n" + "OK");
-		} catch (Exception e) {
-			System.out.println(entidadeController + "." + teste + ":\n" + error);
-			fail(error);
-		}
-	}
-
-	
-	
-
 }
