@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 
 import dao.FuncionarioDAO;
 import entitys.Funcionario;
-import javafx.stage.Stage;
 import junit.framework.TestCase;
 import views.controllers.HomeController;
 import views.controllers.funcionario.CadFuncionarioController;
@@ -55,12 +54,40 @@ class PesquisaFuncionarioControllerTest extends TestCase {
 	
 	
 	@Nested
-	@DisplayName("Erro")
+	@DisplayName("Teste")
 	class Erro{
 	
 	@Test
 	@Disabled
-	@DisplayName("Falha Proposital")
+	@DisplayName("Disabled")
+	void DisabledTest() {
+		error = "valor atual é diferente do esperado -> a != b";
+		try {
+			int a = 1;
+			int b = 2;
+			assertEquals(a, b);
+
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
+	
+	@Test
+	@DisplayName("Success")
+	void SuccessTest() {
+		error = "valor atual é diferente do esperado -> a != b";
+		try {
+			int a = 1;
+			int b = 1;
+			assertEquals(a, b);
+
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
+	
+	@Test
+	@DisplayName("Fail")
 	void FailTest() {
 		error = "valor atual é diferente do esperado -> a != b";
 		try {
@@ -72,6 +99,7 @@ class PesquisaFuncionarioControllerTest extends TestCase {
 			fail(error);
 		}
 	}
+
 
 		
 	}
