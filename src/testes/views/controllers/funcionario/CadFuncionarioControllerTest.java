@@ -1,7 +1,8 @@
 package testes.views.controllers.funcionario;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import dao.FuncionarioDAO;
 import entitys.Funcionario;
@@ -9,6 +10,7 @@ import views.controllers.HomeController;
 import views.controllers.funcionario.CadFuncionarioController;
 import views.controllers.funcionario.PesquisaFuncionarioController;
 
+@DisplayName("Controller - Cadastro do Funcionario")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CadFuncionarioControllerTest {
 	
@@ -17,8 +19,7 @@ class CadFuncionarioControllerTest {
 	CadFuncionarioController cadFuncionarioController;
 	Funcionario func;
 	FuncionarioDAO funcDAO;	
-	
-	String error = "mensagem que só aparece se o método não tem declaração para variável -String error, isso é possível por causa do -TestInstance.Lifecycle.PER_CLASS";
+	String error;	
 
 	@BeforeEach
 	@DisplayName("Init Cadastro Funcionario")
@@ -29,8 +30,68 @@ class CadFuncionarioControllerTest {
 		func = new Funcionario();
 		funcDAO = new FuncionarioDAO();		
 	}
+		
+	@Test 
+	@DisplayName("Demissao do Funcionario")
+	void testDemitir() {
+		error = "Erro ao tentar executar comando de exclusão do funcionario";
+		try {
+			
+			assertAll(
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1)
+					);
+			
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
 	
+	@Test 
+	@DisplayName("Edicao do Funcionario")
+	void testEditar() {
+		error = "Erro ao tentar executar comando de edição do funcionario";
+		try {
+			
+			assertAll(
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1)
+					);
+	
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
+	
+	@Test 
+	@DisplayName("Gravacao do Funcionario")
+	void testGravar() {
+		error = "Erro ao tentar executar comando de gravação do funcionario";
+		try {
+			
+			assertAll(
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1),
+					() -> assertEquals(1,1)
+					);
+		
+		} catch (Exception e) {
+			fail(error);
+		}
+	}
+	
+	
+	@Nested
+	@DisplayName("Erro")
+	class Erro{
+			
 	@Test
+	@Disabled
 	@DisplayName("Falha Proposital")
 	void FailTest() {
 		error = "valor atual é diferente do esperado -> a != b";
@@ -44,18 +105,6 @@ class CadFuncionarioControllerTest {
 		}
 	}
 	
-	
-	@Test
-	@DisplayName("Teste Inicializacao da Tela Cadastro Funcionario")
-	void testGetCadFuncionario() {
-		error = "ERROR: erro ao tentar executar a tela CadFuncionario";
-		try {
-			
-			//assertEquals(expected, actual);			
-			 
-		} catch (Exception e) {
-			fail(error);
-		}
 	}
 		
 }
