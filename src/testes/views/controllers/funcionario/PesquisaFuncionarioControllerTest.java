@@ -1,11 +1,11 @@
 package testes.views.controllers.funcionario;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import dao.FuncionarioDAO;
 import entitys.Funcionario;
-import junit.framework.TestCase;
 import views.controllers.HomeController;
 import views.controllers.funcionario.CadFuncionarioController;
 import views.controllers.funcionario.PesquisaFuncionarioController;
@@ -13,7 +13,7 @@ import views.controllers.funcionario.PesquisaFuncionarioController;
 	
 @DisplayName("Controller - Pesquisa do Funcionario")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PesquisaFuncionarioControllerTest extends TestCase {
+class PesquisaFuncionarioControllerTest {
 	
 	//Declare:
 	HomeController homeController; 
@@ -41,21 +41,21 @@ class PesquisaFuncionarioControllerTest extends TestCase {
 		try {
 			
 		assertAll(
-				() -> assertEquals(1,1),
-				() -> assertEquals(1,1),
-				() -> assertEquals(1,1),
-				() -> assertEquals(1,1)
+				() -> assertNotEquals(pesquisaFuncionarioController, null, error),
+				() -> assertEquals(1,1, error),
+				() -> assertEquals(1,1, error),
+				() -> assertEquals(1,1, error)
 				);
 			
 		} catch (Exception e) {
-			fail(error);
+			fail();
 		}
 	}
 	
 	
 	@Nested
 	@DisplayName("Teste")
-	class Erro{
+	class Teste{
 	
 	@Test
 	@Disabled
@@ -65,10 +65,10 @@ class PesquisaFuncionarioControllerTest extends TestCase {
 		try {
 			int a = 1;
 			int b = 2;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
-			fail(error);
+			fail();
 		}
 	}
 	
@@ -79,24 +79,25 @@ class PesquisaFuncionarioControllerTest extends TestCase {
 		try {
 			int a = 1;
 			int b = 1;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
-			fail(error);
+			fail();
 		}
 	}
 	
 	@Test
+	@Disabled
 	@DisplayName("Fail")
 	void FailTest() {
-		error = "valor atual é diferente do esperado -> a != b";
+		error = "valores de 'a' e 'b' não são iguais.";
 		try {
 			int a = 1;
 			int b = 2;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
-			fail(error);
+			fail();
 		}
 	}
 

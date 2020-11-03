@@ -69,6 +69,7 @@ class CadFuncionarioControllerTest {
 	
 	@Test 
 	@DisplayName("Gravacao do Funcionario")
+	//@RepeatedTest(2)
 	void testGravar() {
 		error = "Erro ao tentar executar comando de gravação do funcionario";
 		try {
@@ -88,7 +89,7 @@ class CadFuncionarioControllerTest {
 	
 	@Nested
 	@DisplayName("Teste")
-	class Erro{
+	class Teste{
 	
 	@Test
 	@Disabled
@@ -98,7 +99,7 @@ class CadFuncionarioControllerTest {
 		try {
 			int a = 1;
 			int b = 2;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
 			fail(error);
@@ -112,7 +113,7 @@ class CadFuncionarioControllerTest {
 		try {
 			int a = 1;
 			int b = 1;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
 			fail(error);
@@ -120,13 +121,14 @@ class CadFuncionarioControllerTest {
 	}
 	
 	@Test
+	@Disabled
 	@DisplayName("Fail")
 	void FailTest() {
 		error = "valor atual é diferente do esperado -> a != b";
 		try {
 			int a = 1;
 			int b = 2;
-			assertEquals(a, b);
+			assertEquals(a, b, error);
 
 		} catch (Exception e) {
 			fail(error);
