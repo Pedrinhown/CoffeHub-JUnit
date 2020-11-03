@@ -12,7 +12,7 @@ import dao.FornecedorDAO;
 import entitys.Fornecedor;
 import exceptions.CampoVazioException;
 import exceptions.MoreThanOneException;
-import exceptions.TextoInvalidoException;
+import exceptions.ItemInvalidoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Formatacao;
+import views.controllers.cliente.CadClienteController;
 
 public class CadFornecedorController implements Initializable {
 
@@ -171,7 +172,7 @@ public class CadFornecedorController implements Initializable {
 		if (texto.equals("") || texto == null)
 			throw new CampoVazioException(msg);
 		if (!texto.matches(".*@.*") && !texto.matches(".*.com.*"))
-			throw new TextoInvalidoException(msg);
+			throw new ItemInvalidoException(msg);
 		return true;
 	}
 
@@ -181,13 +182,13 @@ public class CadFornecedorController implements Initializable {
 		texto = texto.replaceAll("[^0-9]+", "");
 		if (texto.length() == 11 || texto.length() == 14) return true;
 
-		throw new TextoInvalidoException(msg);
+		throw new ItemInvalidoException(msg);
 	}
 
 	private Boolean verificaNumero(@Nullable String texto, String msg) {
 		try {
 			texto = texto.replaceAll("[^0-9]+", "");
-			if(texto.length() > 11 || texto.length() < 8) throw new TextoInvalidoException(msg);
+			if(texto.length() > 11 || texto.length() < 8) throw new ItemInvalidoException(msg);
 			if(texto.length() > 9 && texto.length() <= 11 ) texto = texto.substring(2, texto.length());
 
 			Integer.parseInt(texto);

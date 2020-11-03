@@ -1,28 +1,29 @@
 package views.controllers.cliente;
 
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.istack.internal.Nullable;
 
 import dao.ClienteDAO;
 import entitys.Cliente;
+import entitys.Funcionario;
+import entitys.Pessoa;
 import exceptions.CampoVazioException;
+import exceptions.ItemInvalidoException;
 import exceptions.MoreThanOneException;
-import exceptions.TextoInvalidoException;
-
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -161,7 +162,7 @@ public class CadClienteController implements Initializable {
 		}
 	}
 
-	private void conferirCampos() {
+	protected void conferirCampos() {
 		passou(txtNome.getText(), "Insira um Nome");
 		verificaDocumento(txtDocumento.getText(), "Insira um documento");
 		verificaNumero(txtTelefone.getText(), "Insira um Telefone");
@@ -169,29 +170,29 @@ public class CadClienteController implements Initializable {
 		passou(txtEndereco.getText(), "Insira um Endereço");
 	}
 
-	private Boolean verificaEmail(String texto, String msg) {
+	protected Boolean verificaEmail(String texto, String msg) {
 		if (texto.equals("") || texto == null)
 			throw new CampoVazioException(msg);
 		if (!texto.matches(".*@.*") && !texto.matches(".*.com.*"))
-			throw new TextoInvalidoException(msg);
+			throw new ItemInvalidoException("Insira um email correto");
 		return true;
 	}
 
-	private Boolean verificaDocumento(String texto, String msg) {
+	protected Boolean verificaDocumento(String texto, String msg) {
 		if (texto.equals("") || texto == null)
 			throw new CampoVazioException(msg);
 		texto = texto.replaceAll("[^0-9]+", "");
 		if (texto.length() == 11 || texto.length() == 14)
 			return true;
 
-		throw new TextoInvalidoException(msg);
+		throw new ItemInvalidoException(msg);
 	}
 
-	private Boolean verificaNumero(@Nullable String texto, String msg) {
+	protected Boolean verificaNumero(@Nullable String texto, String msg) {
 		try {
 			texto = texto.replaceAll("[^0-9]+", "");
 			if (texto.length() > 11 || texto.length() < 8)
-				throw new TextoInvalidoException(msg);
+				throw new ItemInvalidoException(msg);
 			if (texto.length() > 9 && texto.length() <= 11)
 				texto = texto.substring(2, texto.length());
 			Integer.parseInt(texto);
@@ -202,7 +203,7 @@ public class CadClienteController implements Initializable {
 		return true;
 	}
 
-	private Boolean passou(@Nullable String texto, String msg) {
+	protected Boolean passou(@Nullable String texto, String msg) {
 		if (texto.equals("") || texto == null)
 			throw new CampoVazioException(msg);
 		return true;

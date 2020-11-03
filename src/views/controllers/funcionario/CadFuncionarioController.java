@@ -14,7 +14,7 @@ import entitys.Acesso;
 import entitys.Funcionario;
 import exceptions.CampoVazioException;
 import exceptions.MoreThanOneException;
-import exceptions.TextoInvalidoException;
+import exceptions.ItemInvalidoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -258,7 +258,7 @@ public class CadFuncionarioController implements Initializable {
 		if (texto.equals("") || texto == null)
 			throw new CampoVazioException(msg);
 		if (!texto.matches(".*@.*") && !texto.matches(".*.com.*"))
-			throw new TextoInvalidoException("Senhas não estão iguais");
+			throw new ItemInvalidoException("Senhas não estão iguais");
 		return true;
 	}
 
@@ -269,14 +269,14 @@ public class CadFuncionarioController implements Initializable {
 		if (texto.length() == 11 || texto.length() == 14)
 			return true;
 
-		throw new TextoInvalidoException(msg);
+		throw new ItemInvalidoException(msg);
 	}
 
 	private Boolean verificaNumero(@Nullable String texto, String msg) {
 		try {
 			texto = texto.replaceAll("[^0-9]+", "");
 			if (texto.length() > 11 || texto.length() < 8)
-				throw new TextoInvalidoException(msg);
+				throw new ItemInvalidoException(msg);
 			if (texto.length() > 9 && texto.length() <= 11)
 				texto = texto.substring(2, texto.length());
 			Integer.parseInt(texto);
