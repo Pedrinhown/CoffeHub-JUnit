@@ -169,6 +169,22 @@ public class ControlProduto {
 		return lstProd;
 	}
 	
+	public int BuscarUltimo() throws Exception {
+		int retorno = 0;
+		try
+		{
+			Connection conn = ConexaoMySql.getInstance().getConnection();
+			
+			ProdutoDAO prodDAO = new ProdutoDAO(conn);
+			
+			retorno = prodDAO.BuscarUltimo();
+		} 
+		catch (Exception e) {
+			throw e;
+		}
+		return retorno;
+	}
+	
 private void ValidarProdutoGravar(Produto prod) throws Exception {
 		
 		if(prod == null) throw new Exception("Informe um produto para a gravação.");

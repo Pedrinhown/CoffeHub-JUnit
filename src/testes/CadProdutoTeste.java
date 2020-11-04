@@ -42,7 +42,7 @@ public class CadProdutoTeste {
 			Categoria cat = this.CategoriaValidaGravar();
 			retorno = this.ProdutoValidoGravar();
 			String nomeCat = cat.getNome();
-			String nomeProd = retorno.getDescricao();
+			/* String nomeProd = retorno.getDescricao(); */
 			
 			ctCategoria.Inserir(cat);
 			 
@@ -51,11 +51,10 @@ public class CadProdutoTeste {
 					  .orElse(null);
 			 
 			 retorno.setCategoria(cat);
+
+			 retorno = ctProduto.Carregar(ctProduto.Inserir(retorno));
+
 			 
-			 ctProduto.Inserir(retorno);
-			 
-			 retorno = ctProduto.Listar(retorno.getDescricao()).stream().filter(x -> x.getDescricao().equals(nomeProd)).findAny().orElse(null);
-			
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
@@ -64,6 +63,13 @@ public class CadProdutoTeste {
 		}
 		
 		return retorno;
+	}
+	
+	
+	@Test
+	public void TestarGravarProdutoComCat() throws Exception
+	{
+		Assert.assertEquals(new ControlProduto().BuscarUltimo(), this.GravarProdutoValidoComCategoria().getCod());
 	}
 	
 	@Ignore
@@ -246,14 +252,7 @@ public class CadProdutoTeste {
 			Assert.assertEquals("A unidade de medida deve ser de 2 caracteres", e.getMessage());
 		}
 	}	
-	
-	@Ignore
-	@Test
-	public void TestaCategoriaProdutoEditar() {
-		// Gravar nova categoria -> carrega ela -> gravar a mesma no produto -> deletar categoria para forçar exception de constraint fk
-	}
 
-	
 	
 	// testar o gravar no geral
 	@Ignore
