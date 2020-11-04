@@ -35,9 +35,14 @@ public class CategoriaDAO implements ICategoriaDAO {
 
 			PreparedStatement statement = conexao.prepareStatement(sql);
 			
-			statement.setInt(1, this.ProximoNumeroCategoria());
+			retorno = this.ProximoNumeroCategoria();
+			statement.setInt(1, retorno);
 			statement.setString(2, cat.getNome());
-			retorno = statement.executeUpdate();
+			
+			
+			if (statement.executeUpdate() <= 0) {
+				retorno = -1;
+			}
 			
 		} catch (ClassNotFoundException classEx) {
 			/* classEx.printStackTrace(); */
@@ -231,6 +236,33 @@ public class CategoriaDAO implements ICategoriaDAO {
 			
 			if (numeroCategoria < 0) throw new Exception ("Não foi possível recuperar o proximo número da categoria");
 			
+			statement.close();			
+			
+		} 
+		 catch (Exception ex) {
+			throw ex;
+		}
+
+		return numeroCategoria + 1;
+	}
+
+	private int BuscarUltimo() throws Exception {
+		
+		
+		int numeroCategoria = 0;
+
+		try {		
+
+			PreparedStatement statement = conexao.prepareStatement("select ifnull(max(cod),0) as 'maior' from categoria");
+
+			ResultSet resultSet = statement.executeQuery();
+
+			while(resultSet.next()) {
+				numeroCategoria = resultSet.getInt("maior");
+			}
+			
+			if (numeroCategoria < 0) throw new Exception ("Não foi possível recuperar o ultimo número da categoria");
+			
 			statement.close();
 			
 			
@@ -247,5 +279,5 @@ public class CategoriaDAO implements ICategoriaDAO {
 
 		return numeroCategoria + 1;
 	}
-
+	
 }
