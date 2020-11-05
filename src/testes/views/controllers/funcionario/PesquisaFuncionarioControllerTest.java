@@ -8,17 +8,12 @@ import java.time.LocalDate;
 
 import dao.FuncionarioDAO;
 import entitys.Funcionario;
-import views.controllers.HomeController;
-import views.controllers.funcionario.CadFuncionarioController;
-import views.controllers.funcionario.PesquisaFuncionarioController;
 	
 @DisplayName("Controller - Pesquisa do Funcionario")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PesquisaFuncionarioControllerTest {
 	
 	//Declare:
-	private PesquisaFuncionarioController pesquisaFuncionarioController;
-	private CadFuncionarioController cadFuncionarioController;
 	private Funcionario func;
 	private FuncionarioDAO funcDAO;	
 	private String error;	
@@ -40,10 +35,7 @@ class PesquisaFuncionarioControllerTest {
 	}
 	
 	@BeforeEach
-	@DisplayName("Init Pesquisa Funcionario")
 	void init() {
-		pesquisaFuncionarioController = new PesquisaFuncionarioController();
-		cadFuncionarioController = new CadFuncionarioController();
 		func = new Funcionario();
 		funcDAO = new FuncionarioDAO();
 	}

@@ -10,17 +10,11 @@ import java.time.LocalDate;
 
 import dao.FuncionarioDAO;
 import entitys.Funcionario;
-import javafx.stage.Stage;
-import views.controllers.HomeController;
-import views.controllers.funcionario.CadFuncionarioController;
-import views.controllers.funcionario.PesquisaFuncionarioController;
 
 @DisplayName("Controller - Cadastro do Funcionario")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CadFuncionarioControllerTest {
 	
-	private PesquisaFuncionarioController pesquisaFuncionarioController;
-	private CadFuncionarioController cadFuncionarioController;
 	private Funcionario func;
 	private FuncionarioDAO funcDAO;	
 	private String error;	
@@ -42,17 +36,14 @@ class CadFuncionarioControllerTest {
 	}
 	
 	@BeforeEach
-	@DisplayName("Init Cadastro Funcionario")
 	void init() {
-		pesquisaFuncionarioController = new PesquisaFuncionarioController();
-		cadFuncionarioController = new CadFuncionarioController();
 		func = new Funcionario();
 		funcDAO = new FuncionarioDAO();		
 	}
 	
 	@Test
 	@DisplayName("Buscar Funcionario por ID")
-	@RepeatedTest(10)
+	//@RepeatedTest(10)
 	void testBuscarID() {
 		error = "Erro ao tentar buscar fazer a busca do funcionario por ID(int)";
 		try {
