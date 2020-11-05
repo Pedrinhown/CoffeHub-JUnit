@@ -78,7 +78,7 @@ class CadFuncionarioControllerTest {
 		assertEquals("12312312312", cpf);
 		
 		funcDAO.verificaRG(setFuncionario().getDocumento());
-		assertNotEquals(123455789, setFuncionario().getDocumento());
+		assertEquals("123455789", setFuncionario().getDocumento());
 		
 	}
 		

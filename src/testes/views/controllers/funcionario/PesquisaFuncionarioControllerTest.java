@@ -49,6 +49,7 @@ class PesquisaFuncionarioControllerTest {
 			
 			funcDAO.inserir(setFuncionario());
 			funcDAO.listar().add(setFuncionario());
+			funcDAO.listar();
 								
 		assertAll(
 				() -> assertNotEquals(null, funcDAO.listar().add(setFuncionario()), error),
