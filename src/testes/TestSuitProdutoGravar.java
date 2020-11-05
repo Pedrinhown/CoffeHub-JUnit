@@ -71,8 +71,7 @@ public class TestSuitProdutoGravar {
 		Duration duracao = Duration.between(inicio, fim);
 		long duracaoSegundos = (duracao.toMillis() / 1000) % 60;
 		
-		Assert.assertTrue(duracaoSegundos > 20 ? false:true);
-
+		Assert.assertTrue(duracaoSegundos > 20 ? false : true);
 	}
 	
 
@@ -90,7 +89,7 @@ public class TestSuitProdutoGravar {
 		produto.setDescricao("");
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Inserir(produto));
+			new ControlProduto().Inserir(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -107,7 +106,7 @@ public class TestSuitProdutoGravar {
 		produto.setQtd_atual(-1);
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Inserir(produto));
+			new ControlProduto().Inserir(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -133,8 +132,6 @@ public class TestSuitProdutoGravar {
 			Assert.assertEquals("O valor unitário não pode ser menor ou igual a zero.", e.getMessage());
 		}
 	}
-	
-	
 
 	@Test
 	public void TestaUnProdutoInvalidoGravar() {

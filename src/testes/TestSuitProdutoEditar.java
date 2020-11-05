@@ -13,10 +13,7 @@ import entitys.Categoria;
 import entitys.Produto;
 
 public class TestSuitProdutoEditar {
-
-	
 	// Testar todos os campos - Editar
-	
 
 	@Test
 	public void TesteProdutoCodInvalidoEdicao() {
@@ -24,7 +21,7 @@ public class TestSuitProdutoEditar {
 		produto.setCod(-1);
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -32,7 +29,6 @@ public class TestSuitProdutoEditar {
 			Assert.assertEquals("Informe uma ID válida para o produto", e.getMessage());
 		}
 	}
-	
 
 	@Test
 	public void TestaDescricaoProdutoInvalidoEditar() {
@@ -41,7 +37,7 @@ public class TestSuitProdutoEditar {
 		produto.setDescricao("");
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -60,7 +56,7 @@ public class TestSuitProdutoEditar {
 		produto.setQtd_atual(-1);
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -80,7 +76,7 @@ public class TestSuitProdutoEditar {
 		produto.setValor_un(-1);
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -100,7 +96,7 @@ public class TestSuitProdutoEditar {
 		produto.setUnidadeMedida("CCCCCC");
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
 			fail();
 		}
 		catch (Exception e)
@@ -116,7 +112,8 @@ public class TestSuitProdutoEditar {
 		Produto produto = null;
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Editar(produto));
+			new ControlProduto().Editar(produto);
+			
 			fail();
 		}
 		catch (Exception e)

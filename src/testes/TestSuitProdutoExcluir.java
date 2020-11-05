@@ -42,8 +42,6 @@ public class TestSuitProdutoExcluir {
 			 retorno.setCategoria(cat);
 
 			 retorno = ctProduto.Carregar(ctProduto.Inserir(retorno));
-
-			 
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
@@ -61,7 +59,7 @@ public class TestSuitProdutoExcluir {
 		produto.setCod(-1);
 		try 
 		{
-			Assert.assertEquals(1, new ControlProduto().Deletar(produto.getCod()));
+			new ControlProduto().Deletar(produto.getCod());
 			fail();
 		}
 		catch (Exception e)
@@ -76,7 +74,7 @@ public class TestSuitProdutoExcluir {
 		produto.setCod(5000);
 		try 
 		{
-			Assert.assertEquals(0, new ControlProduto().Deletar(produto.getCod()));
+			new ControlProduto().Deletar(produto.getCod());
 		}
 		catch (Exception e)
 		{
