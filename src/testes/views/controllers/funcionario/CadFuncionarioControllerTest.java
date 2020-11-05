@@ -1,6 +1,5 @@
 package testes.views.controllers.funcionario;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +16,6 @@ import views.controllers.funcionario.PesquisaFuncionarioController;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CadFuncionarioControllerTest {
 	
-	private HomeController homeController; 
 	private PesquisaFuncionarioController pesquisaFuncionarioController;
 	private CadFuncionarioController cadFuncionarioController;
 	private Funcionario func;
@@ -40,25 +38,9 @@ class CadFuncionarioControllerTest {
 		return func;
 	}
 	
-	private Funcionario setFuncionarioNoID() {
-		func.setNome("Nome");	
-		func.setEmail("a@a.com");
-		func.setTelefone("12312312");
-		func.setDocumento("123457789");
-		func.setEndereco("rua Ruaruarua");
-		func.setSalario(9999.99);
-		func.setData_contratacao(LocalDate.of(2020, 10, 10));
-		func.setData_demissao(null);
-		func.setCod_acesso(1);
-		func.setSenha_funcionario("1");
-
-		return func;
-	}
-
 	@BeforeEach
 	@DisplayName("Init Cadastro Funcionario")
 	void init() {
-		homeController = new HomeController();
 		pesquisaFuncionarioController = new PesquisaFuncionarioController();
 		cadFuncionarioController = new CadFuncionarioController();
 		func = new Funcionario();
@@ -73,9 +55,8 @@ class CadFuncionarioControllerTest {
 						
 			funcDAO.deletar(setFuncionario().getCod());
 
-			assertAll(
-					() -> assertEquals(1, setFuncionario().getCod(), error)
-					);
+			assertEquals(1, setFuncionario().getCod(), error);
+					
 			
 		} catch (Exception e) {
 			fail(error);

@@ -17,7 +17,6 @@ import views.controllers.funcionario.PesquisaFuncionarioController;
 class PesquisaFuncionarioControllerTest {
 	
 	//Declare:
-	private HomeController homeController; 
 	private PesquisaFuncionarioController pesquisaFuncionarioController;
 	private CadFuncionarioController cadFuncionarioController;
 	private Funcionario func;
@@ -40,26 +39,9 @@ class PesquisaFuncionarioControllerTest {
 		return func;
 	}
 	
-	private Funcionario setFuncionarioNoID() {
-		func.setNome("Nome");	
-		func.setEmail("a@a.com");
-		func.setTelefone("12312312");
-		func.setDocumento("123457789");
-		func.setEndereco("rua Ruaruarua");
-		func.setSalario(9999.99);
-		func.setData_contratacao(LocalDate.of(2020, 10, 10));
-		func.setData_demissao(null);
-		func.setCod_acesso(1);
-		func.setSenha_funcionario("1");
-
-		return func;
-	}
-
-	
 	@BeforeEach
 	@DisplayName("Init Pesquisa Funcionario")
 	void init() {
-		homeController = new HomeController();
 		pesquisaFuncionarioController = new PesquisaFuncionarioController();
 		cadFuncionarioController = new CadFuncionarioController();
 		func = new Funcionario();
@@ -73,21 +55,21 @@ class PesquisaFuncionarioControllerTest {
 		error = "Erro ao tentar executar comando de pesquisa do funcionario";
 		try {			
 			
-			funcDAO.inserir(setFuncionarioNoID());
+			funcDAO.inserir(setFuncionario());
 			funcDAO.listar().add(setFuncionario());
 								
 		assertAll(
 				() -> assertNotEquals(null, funcDAO.listar().add(setFuncionario()), error),
-				() -> assertEquals("Nome", func.getNome(), error),
-				() -> assertEquals("a@a.com", func.getEmail(), error),
-				() -> assertEquals("12312312", func.getTelefone(), error),
-				() -> assertEquals("123457789", func.getDocumento(), error),
-				() -> assertEquals("rua Ruaruarua", func.getEndereco(), error),
-				() -> assertEquals(9999.99, func.getSalario(), error),
-				() -> assertEquals(LocalDate.of(2020, 10, 10), func.getData_contratacao(), error),
-				() -> assertEquals(null, func.getData_demissao(), error),
-				() -> assertEquals(1, func.getCod_acesso(), error),
-				() -> assertEquals("1", func.getSenha_funcionario(), error)
+				() -> assertEquals("Nome", setFuncionario().getNome(), error),
+				() -> assertEquals("a@a.com", setFuncionario().getEmail(), error),
+				() -> assertEquals("12312312", setFuncionario().getTelefone(), error),
+				() -> assertEquals("123457789", setFuncionario().getDocumento(), error),
+				() -> assertEquals("rua Ruaruarua", setFuncionario().getEndereco(), error),
+				() -> assertEquals(9999.99, setFuncionario().getSalario(), error),
+				() -> assertEquals(LocalDate.of(2020, 10, 10), setFuncionario().getData_contratacao(), error),
+				() -> assertEquals(null, setFuncionario().getData_demissao(), error),
+				() -> assertEquals(1, setFuncionario().getCod_acesso(), error),
+				() -> assertEquals("1", setFuncionario().getSenha_funcionario(), error)
 				
 				);
 			
@@ -129,8 +111,6 @@ class PesquisaFuncionarioControllerTest {
 			fail();
 		}
 	}
-
-
 		
 	}
 
