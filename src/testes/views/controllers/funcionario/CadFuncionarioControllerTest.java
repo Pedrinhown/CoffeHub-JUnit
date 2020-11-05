@@ -1,5 +1,6 @@
 package testes.views.controllers.funcionario;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,12 +17,43 @@ import views.controllers.funcionario.PesquisaFuncionarioController;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CadFuncionarioControllerTest {
 	
-	HomeController homeController; 
-	PesquisaFuncionarioController pesquisaFuncionarioController;
-	CadFuncionarioController cadFuncionarioController;
-	Funcionario func;
-	FuncionarioDAO funcDAO;	
-	String error;	
+	private HomeController homeController; 
+	private PesquisaFuncionarioController pesquisaFuncionarioController;
+	private CadFuncionarioController cadFuncionarioController;
+	private Funcionario func;
+	private FuncionarioDAO funcDAO;	
+	private String error;	
+	
+	private Funcionario setFuncionario() {
+		func.setCod(1);
+		func.setNome("Nome");	
+		func.setEmail("a@a.com");
+		func.setTelefone("12312312");
+		func.setDocumento("123455789");
+		func.setEndereco("rua Ruaruarua");
+		func.setSalario(9999.99);
+		func.setData_contratacao(LocalDate.of(2020, 10, 10));
+		func.setData_demissao(null);
+		func.setCod_acesso(1);
+		func.setSenha_funcionario("1");
+
+		return func;
+	}
+	
+	private Funcionario setFuncionarioNoID() {
+		func.setNome("Nome");	
+		func.setEmail("a@a.com");
+		func.setTelefone("12312312");
+		func.setDocumento("123457789");
+		func.setEndereco("rua Ruaruarua");
+		func.setSalario(9999.99);
+		func.setData_contratacao(LocalDate.of(2020, 10, 10));
+		func.setData_demissao(null);
+		func.setCod_acesso(1);
+		func.setSenha_funcionario("1");
+
+		return func;
+	}
 
 	@BeforeEach
 	@DisplayName("Init Cadastro Funcionario")
@@ -38,13 +70,11 @@ class CadFuncionarioControllerTest {
 	void testDemitir() {
 		error = "Erro ao tentar executar comando de exclusão do funcionario";
 		try {
-			
-			func.setCod(1);
-			
-			funcDAO.deletar(func.getCod());
+						
+			funcDAO.deletar(setFuncionario().getCod());
 
 			assertAll(
-					() -> assertEquals(1, func.getCod(), error)
+					() -> assertEquals(1, setFuncionario().getCod(), error)
 					);
 			
 		} catch (Exception e) {
@@ -58,32 +88,20 @@ class CadFuncionarioControllerTest {
 		error = "Erro ao tentar executar comando de edição do funcionario";
 		try {
 			
-			func.setCod(1);
-			func.setNome("Nome");	
-			func.setEmail("a@a.com");
-			func.setTelefone("12312312");
-			func.setDocumento("123456789");
-			func.setEndereco("rua Ruaruarua");
-			func.setSalario(9999.99);
-			func.setData_contratacao(LocalDate.of(2020, 10, 10));
-			func.setData_demissao(null);
-			func.setCod_acesso(1);
-			func.setSenha_funcionario("1");
-			
-			funcDAO.editar(func);
+			funcDAO.editar(setFuncionario());
 			
 			assertAll(
-					() -> assertEquals(1, func.getCod(), error),
-					() -> assertEquals("Nome", func.getNome(), error),
-					() -> assertEquals("a@a.com", func.getEmail(), error),
-					() -> assertEquals("12312312", func.getTelefone(), error),
-					() -> assertEquals("123456789", func.getDocumento(), error),
-					() -> assertEquals("rua Ruaruarua", func.getEndereco(), error),
-					() -> assertEquals(9999.99, func.getSalario(), error),
-					() -> assertEquals(LocalDate.of(2020, 10, 10), func.getData_contratacao(), error),
-					() -> assertEquals(null, func.getData_demissao(), error),
-					() -> assertEquals(1, func.getCod_acesso(), error),
-					() -> assertEquals("1", func.getSenha_funcionario(), error)
+					() -> assertEquals(1, setFuncionario().getCod(), error),
+					() -> assertEquals("Nome", setFuncionario().getNome(), error),
+					() -> assertEquals("a@a.com", setFuncionario().getEmail(), error),
+					() -> assertEquals("12312312", setFuncionario().getTelefone(), error),
+					() -> assertEquals("123455789", setFuncionario().getDocumento(), error),
+					() -> assertEquals("rua Ruaruarua", setFuncionario().getEndereco(), error),
+					() -> assertEquals(9999.99, setFuncionario().getSalario(), error),
+					() -> assertEquals(LocalDate.of(2020, 10, 10), setFuncionario().getData_contratacao(), error),
+					() -> assertEquals(null, setFuncionario().getData_demissao(), error),
+					() -> assertEquals(1, setFuncionario().getCod_acesso(), error),
+					() -> assertEquals("1", setFuncionario().getSenha_funcionario(), error)
 					);
 	
 		} catch (Exception e) {
@@ -97,32 +115,21 @@ class CadFuncionarioControllerTest {
 	void testGravar() {
 		error = "Erro ao tentar executar comando de gravação do funcionario";
 		try {
-			func.setCod(1);
-			func.setNome("Nome");	
-			func.setEmail("a@a.com");
-			func.setTelefone("12312312");
-			func.setDocumento("123456789");
-			func.setEndereco("rua Ruaruarua");
-			func.setSalario(9999.99);
-			func.setData_contratacao(LocalDate.of(2020, 10, 10));
-			func.setData_demissao(null);
-			func.setCod_acesso(1);
-			func.setSenha_funcionario("1");
 			
-			funcDAO.inserir(func);
+			funcDAO.inserir(setFuncionario());
 			
 			assertAll(
-					() -> assertEquals(1, func.getCod(), error),
-					() -> assertEquals("Nome", func.getNome(), error),
-					() -> assertEquals("a@a.com", func.getEmail(), error),
-					() -> assertEquals("12312312", func.getTelefone(), error),
-					() -> assertEquals("123456789", func.getDocumento(), error),
-					() -> assertEquals("rua Ruaruarua", func.getEndereco(), error),
-					() -> assertEquals(9999.99, func.getSalario(), error),
-					() -> assertEquals(LocalDate.of(2020, 10, 10), func.getData_contratacao(), error),
-					() -> assertEquals(null, func.getData_demissao(), error),
-					() -> assertEquals(1, func.getCod_acesso(), error),
-					() -> assertEquals("1", func.getSenha_funcionario(), error)
+					() -> assertEquals(1, setFuncionario().getCod(), error),
+					() -> assertEquals("Nome", setFuncionario().getNome(), error),
+					() -> assertEquals("a@a.com", setFuncionario().getEmail(), error),
+					() -> assertEquals("12312312", setFuncionario().getTelefone(), error),
+					() -> assertEquals("123455789", setFuncionario().getDocumento(), error),
+					() -> assertEquals("rua Ruaruarua", setFuncionario().getEndereco(), error),
+					() -> assertEquals(9999.99, setFuncionario().getSalario(), error),
+					() -> assertEquals(LocalDate.of(2020, 10, 10), setFuncionario().getData_contratacao(), error),
+					() -> assertEquals(null, setFuncionario().getData_demissao(), error),
+					() -> assertEquals(1, setFuncionario().getCod_acesso(), error),
+					() -> assertEquals("1", setFuncionario().getSenha_funcionario(), error)
 					
 					);
 		
@@ -152,7 +159,7 @@ class CadFuncionarioControllerTest {
 	
 	@Test
 	@Disabled
-	@DisplayName("Fail")
+	@DisplayName("Fail/Disabled")
 	void FailTest() {
 		error = "valor atual é diferente do esperado -> a != b";
 		try {
