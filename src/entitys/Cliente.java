@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import utils.Formatacao;
 
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements Comparable<Cliente> {
 
 	private LocalDate data_nascimento;
 	private int idade;
@@ -59,10 +59,22 @@ public class Cliente extends Pessoa {
 	@Override
 	public String toString() {
 		DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
-		return "Cliente: cod = " + getCod() + ", idade = " + idade + ", nome=" + getNome()
-				+ ", documento=" + Formatacao.formatarDocumento(getDocumento()) + ", telefone="
+
+		return "Cliente: cod = " + getCod() + ", idade = " + idade + ", nome=" + getNome() + ", documento="
+				+ Formatacao.formatarDocumento(getDocumento()) + ", telefone="
 				+ Formatacao.formatarTelefone(getTelefone()) + ", endereco=" + getEndereco() + ", email=" + getEmail()
 				+ "]";
 	}
+
+	@Override
+	public int compareTo(Cliente outroCliente) {
+		if (this.getCod() > outroCliente.getCod()) {
+			return -1;
+		}
+		if (this.getCod() < outroCliente.getCod()) {
+			return 1;
+		}
+		return 0;
+	}
+
 }

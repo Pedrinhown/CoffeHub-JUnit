@@ -2,6 +2,7 @@ package views.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,15 @@ public class initial {
 	public static void main(String[] args) {
 
 		ClienteDAO dao = new ClienteDAO();
-
-		System.out.println("imagina se funfa ital".matches(".*ital.*"));
+		
+		List<Cliente> lista = dao.listar();
+		System.out.println(lista);
+		
+		Collections.sort(lista);
+		System.out.println(lista);
+		
+		Cliente c = lista.get(lista.size() - 1);
+		System.out.println(c);
 	}
 
 }

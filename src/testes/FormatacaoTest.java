@@ -1,7 +1,7 @@
 /**
  * 
  */
-package testes.utils;
+package testes;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,15 +11,8 @@ import org.junit.jupiter.api.Test;
 import exceptions.ItemInvalidoException;
 import utils.Formatacao;
 
-/**
- * @author Vitor Hainosz
- *
- */
-class FormatacaoTest {
+public class FormatacaoTest {
 
-	/**
-	 * Test method for {@link utils.Formatacao#formatarDocumento(java.lang.String)}.
-	 */
 	@Test
 	final void testFormatarDocumentoCpf() {
 		String cpf = "09574303969";
