@@ -1,7 +1,7 @@
 /**
  * 
  */
-package testes.utils;
+package testes;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,15 +11,8 @@ import org.junit.jupiter.api.Test;
 import exceptions.ItemInvalidoException;
 import utils.Formatacao;
 
-/**
- * @author Vitor Hainosz
- *
- */
-class FormatacaoTest {
+public class FormatacaoTest {
 
-	/**
-	 * Test method for {@link utils.Formatacao#formatarDocumento(java.lang.String)}.
-	 */
 	@Test
 	final void testFormatarDocumentoCpf() {
 		String cpf = "09574303969";
@@ -94,11 +87,9 @@ class FormatacaoTest {
 	@Test
 	final void testFormatarDocumentoErro() {
 		String documento = "123";
-		Exception exception = assertThrows(ItemInvalidoException.class, () -> {
+		assertThrows(ItemInvalidoException.class, () -> {
 			Formatacao.formatarDocumento(documento);
 	    });
-
-		Assert.assertTrue(exception instanceof ItemInvalidoException);
 	}
 	
 	/**
@@ -107,11 +98,9 @@ class FormatacaoTest {
 	@Test
 	final void testFormatarTelefoneErro() {
 		String documento = "123";
-		Exception exception = assertThrows(ItemInvalidoException.class, () -> {
+		assertThrows(ItemInvalidoException.class, () -> {
 			Formatacao.formatarDocumento(documento);
 	    });
-
-		Assert.assertTrue(exception instanceof ItemInvalidoException);
 	}
 }
 
