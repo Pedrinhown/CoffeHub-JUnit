@@ -20,8 +20,8 @@ public class Formatacao {
 
 	public static String formatarDocumento(String cpf_RG) {
 		String cpfRGFormatado = "";
-		cpf_RG = cpf_RG.replaceAll("[^0-9]+", "");
 		try {
+			cpf_RG = cpf_RG.replaceAll("[^0-9]+", "");
 			if (cpf_RG.length() == 11) {
 				MaskFormatter mask = new MaskFormatter("###.###.###-##");
 				mask.setValueContainsLiteralCharacters(false);

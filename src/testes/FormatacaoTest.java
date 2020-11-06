@@ -87,11 +87,9 @@ public class FormatacaoTest {
 	@Test
 	final void testFormatarDocumentoErro() {
 		String documento = "123";
-		Exception exception = assertThrows(ItemInvalidoException.class, () -> {
+		assertThrows(ItemInvalidoException.class, () -> {
 			Formatacao.formatarDocumento(documento);
 	    });
-
-		Assert.assertTrue(exception instanceof ItemInvalidoException);
 	}
 	
 	/**
@@ -100,11 +98,9 @@ public class FormatacaoTest {
 	@Test
 	final void testFormatarTelefoneErro() {
 		String documento = "123";
-		Exception exception = assertThrows(ItemInvalidoException.class, () -> {
+		assertThrows(ItemInvalidoException.class, () -> {
 			Formatacao.formatarDocumento(documento);
 	    });
-
-		Assert.assertTrue(exception instanceof ItemInvalidoException);
 	}
 }
 
