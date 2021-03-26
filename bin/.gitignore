@@ -1,9 +1,11 @@
+/cliente/
+/libs/
 /Helper/
 /control/
 /dao/
 /dto/
 /entitys/
 /exceptions/
+/testes/
 /utils/
 /views/
-/testes/
